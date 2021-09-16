@@ -1,0 +1,94 @@
+#!/bin/bash
+
+set -e
+
+OPTIONS=$(getopt -q -o h -l force-path-brew,skip-install-brew,skip-check-brew,skip-install-requirements -- "$@")
+PREFIX='DOTFILES:'
+
+echo "$OPTIONS"
+
+eval set -- "$OPTIONS"
+
+flag_fpb=false
+flag_sib=false
+flag_scb=false
+flag_sir=false
+
+while [ $# -gt 0 ]; do
+  case $1 in
+  --force-path-brew) flag_fpb=true ;;
+  --skip-install-brew) flag_sib=true ;;
+  --skip-check-brew) flag_scb=true ;;
+  --skip-install-requirements) flag_sir=true ;;
+  --)
+    shift
+    break
+    ;;
+  esac
+  shift
+done
+
+initbrew() {
+  if [ ! $flag_sib ]; then
+    if [ "$1" = "install" ]; then
+      printf "$PREFIX Brewのインストールをしています…\r"
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    fi
+
+    printf "$PREFIX Brewのパスを通しています…\r"
+
+    test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
+    test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+    test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
+    echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
+
+    printf "$PREFIX Brewのパスを通しました。\r"
+
+    if $flag_scb; then
+      printf "$PREFIX Brewの動作を確認しています…\r"
+
+      RES=$(brew doctor)
+      if [ "$RES" = "Your system is ready to brew." ]; then
+        printf "$PREFIX Brewのインストールが完了しました。\r\n"
+      else
+        printf "$PREFIX Brewの動作が確認できませんでした。\r\n"
+      fi
+    fi
+  fi
+}
+
+install() {
+  if [ ! -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
+    initbrew install
+  else
+    printf "$PREFIX Brew was already installed.\n"
+    if $flag_fpb; then
+      initbrew
+    fi
+  fi
+
+  if [ ! -d ~/dotfiles ]; then
+    printf "$PREFIX Dotfilesをクローンしています…\n"
+    cd ~
+    git clone https://github.com/NaruseNia/dotfiles.git
+    printf "\n"
+  fi
+
+  if [ ! $flag_sir ]; then
+    printf "$PREFIX 必要なものをインストールしています…\n"
+    brew bundle -v --file=~/dotfiles/Brewfile
+    printf "$PREFIX 必要なものをインストールしました。\n"
+  fi
+
+  printf "$PREFIX シンボリックリンクを作成しています…\n"
+
+  if [ ! -d ~/.config/nvim ]; then
+    mkdir ~/.config/nvim
+  fi
+
+  stow -v -d ~/dotfiles/packages -t ~/.config/nvim nvim
+  printf "$PREFIX シンボリックリンクを作成しました。\n"
+
+}
+
+install
