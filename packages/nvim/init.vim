@@ -121,6 +121,10 @@ endif
 runtime ./maps.vim
 "}}}
 
+" Airline Setting "{{{
+runtime ./airline.vim
+" }}}"
+
 " Syntax theme "{{{
 " ---------------------------------------------------------------------
 
