@@ -82,9 +82,9 @@ install() {
 
   printf "$PREFIX シンボリックリンクを作成しています…\n"
 
-  if [ ! -d ~/.config/nvim ]; then
-    mkdir ~/.config/nvim
-  fi
+  #if [ ! -d ~/.config/nvim ]; then
+  #  mkdir ~/.config/nvim
+  #fi
 
   stow -v -d ~/dotfiles/packages -t ~/.config/nvim nvim
   printf "$PREFIX シンボリックリンクを作成しました。\n"

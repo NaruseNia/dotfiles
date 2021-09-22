@@ -26,6 +26,8 @@ let g:airline_symbols.spell = 'Ꞩ'
 let g:airline_symbols.notexists = 'Ɇ'
 let g:airline_symbols.whitespace = 'Ξ'
 
+let g:airline_theme = 'onehalfdark'
+
 let g:tmuxline_preset = {
   \'a'    : '#S',
   \'c'    : ['#(whoami)', '#(uptime | cud -d " " -f 1,2,3)'],

@@ -14,6 +14,7 @@ Plug 'junegunn/fzf'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
 
 if has("nvim")
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
