@@ -87,6 +87,7 @@ install() {
   #fi
 
   stow -v -d ~/dotfiles/packages -t ~/.config/nvim nvim
+  stow -v -d ~/dotfiles/packages -t ~/.config/fish fish
   printf "$PREFIX シンボリックリンクを作成しました。\n"
 
 }
