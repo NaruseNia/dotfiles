@@ -15,6 +15,18 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'jacoborus/tender.vim'
+Plug 'kyoz/purify', { 'rtp': 'vim' }
+Plug 'ayu-theme/ayu-vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'tyrannicaltoucan/vim-quantum' 
+Plug 'frenzyexists/aquarium-vim', { 'branch': 'develop' }
+Plug 'adrian5/oceanic-next-vim'
+Plug 'tomasiser/vim-code-dark'
+Plug 'yuttie/hydrangea-vim'
+Plug 'sainnhe/edge'
+Plug 'sainnhe/sonokai'
+Plug 'rust-lang/rust.vim'
 
 if has("nvim")
   Plug 'neoclide/coc.nvim', {'branch': 'release'}

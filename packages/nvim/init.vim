@@ -141,9 +141,14 @@ if exists("&termguicolors") && exists("&winblend")
   "let g:neosolarized_termtrans=1
   "runtime ./colors/NeoSolarized.vim
   "colorscheme NeoSolarized
+  
+  let ayucolor="dark"
+  let g:oceanic_italic_comments=0
 
-  "Use OneHalf
-  colorscheme onehalfdark
+  let g:edge_enable_italic = 0
+  let g:edge_disable_italic_comment = 1
+
+  colorscheme edge 
 endif
 
 "}}}
@@ -151,6 +156,9 @@ endif
 " Extras "{{{
 " ---------------------------------------------------------------------
 set exrc
+lua <<EOF
+require'navigator'.setup()
+EOF
 "}}}
 
 " vim: set foldmethod=marker foldlevel=0:
