@@ -7,6 +7,7 @@ set PATH $HOME/.cargo/bin usr/bin usr/local/bin /home/linuxbrew/.linuxbrew/bin/ 
 set PARCOL peco
 
 #ALIASES
+alias pbcopy='clip.exe'
 alias gq='cd (ghq root)/(ghq list | peco)'  
 alias gcc=/home/linuxbrew/.linuxbrew/bin/gcc-11
 alias g=git
@@ -19,11 +20,13 @@ alias nv='nvim'
 alias ffp='fontforge -script ~/font-patcher/font-patcher'
 
 #Color Settings for fish
-set fish_color_command bryellow
+set fish_color_command ffe599
 set fish_color_error red
-set fish_color_quote brcyan
-set fish_color_param yellow
-set fish_color_operator brpurple
+set fish_color_quote c9daf8
+set fish_color_param fff2cc 
+set fish_color_operator 8e7cc3
+set fish_color_redirection 93c47d
+set fish_color_escape c27ba0
 
 #Run / Attach Tmux when start.
 function attach_tmux_session_if_needed
@@ -50,3 +53,4 @@ end
 if test -z $TMUX && status --is-login
     attach_tmux_session_if_needed
 end
+fish_add_path /home/linuxbrew/.linuxbrew/sbin

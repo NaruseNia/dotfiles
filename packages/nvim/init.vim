@@ -153,6 +153,18 @@ endif
 
 "}}}
 
+" Tmuxline Setting "{{{
+let g:tmuxline_preset = {
+  \'a'    : '#S',
+  \'b'    : '#W',
+  \'c'    : '#H',
+  \'win'  : '#I #W',
+  \'cwin' : '#I #W',
+  \'x'    : ['#{battery_percentage} #{battery_icon}', '%a'],
+  \'y'    : '#W %R',
+  \'z'    : '#H'}
+" }}}
+
 " Extras "{{{
 " ---------------------------------------------------------------------
 set exrc
