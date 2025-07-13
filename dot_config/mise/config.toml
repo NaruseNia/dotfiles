@@ -1,0 +1,9 @@
+[tools]
+bun = "latest"
+deno = "latest"
+go = "1.21"
+node = "latest"
+pnpm = "latest"
+python = "3.12"
+rust = "latest"
+yarn = "latest"

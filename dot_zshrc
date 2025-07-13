@@ -1,0 +1,171 @@
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
+
+export GPG_TTY=$TTY
+
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+
+THEME_NAME="geometry-zsh/geometry"
+
+# zplug
+source ~/.zplug/init.zsh
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+zplug "mafredri/zsh-async"
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-completions"
+zplug "chrissicool/zsh-256color"
+zplug "mrowa44/emojify", as:command
+
+# Theme
+zplug $THEME_NAME
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+  printf "Install? [y/N]: "
+  if read -q; then
+    echo; zplug install
+  fi
+fi
+
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+zplug load
+# zplug end
+
+# setopt
+setopt inc_append_history
+setopt share_history
+setopt hist_ignore_dups
+setopt hist_save_no_dups
+setopt extended_history
+setopt hist_expire_dups_first
+
+autoload -Uz compinit; compinit
+autoload -Uz colors; colors
+
+zstyle ':completion:*:default' menu select=2
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+setopt auto_param_slash
+setopt auto_param_keys
+setopt mark_dirs
+setopt auto_menu
+setopt correct
+setopt interactive_comments
+setopt magic_equal_subst
+setopt complete_in_word
+setopt print_eight_bit
+setopt auto_cd
+setopt no_beep
+
+autoload -Uz history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^P" history-beginning-search-backward-end
+bindkey "^N" history-beginning-search-forward-end
+# setopt end
+
+# Functions
+# fzf history
+function fzf-select-history() {
+    BUFFER=$(history -n -r 1 | fzf --query "$LBUFFER" --reverse)
+    CURSOR=$#BUFFER
+    zle reset-prompt
+}
+zle -N fzf-select-history
+bindkey '^w' fzf-select-history
+
+# fzf cdr
+function fzf-cdr() {
+    local selected_dir=$(cdr -l | awk '{ print $2 }' | fzf --reverse)
+    if [ -n "$selected_dir" ]; then
+        BUFFER="cd ${selected_dir}"
+        zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N fzf-cdr
+setopt noflowcontrol
+bindkey '^q' fzf-cdr
+
+function _fzf_cd_ghq() {
+    FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS} --reverse --height=50%"
+    local root="$(ghq root)"
+    local repo="$(ghq list | fzf --preview="ls -AF --color=always ${root}/{1}")"
+    local dir="${root}/${repo}"
+    [ -n "${dir}" ] && cd "${dir}"
+    zle accept-line
+    zle reset-prompt
+}
+zle -N _fzf_cd_ghq
+bindkey "^z" _fzf_cd_ghq
+
+function _fzf_cd_prj() {
+    FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS} --reverse --height=50%"
+    local root="${HOME}/projects"
+    local prj="$(ls ${root} | fzf)"
+    local dir="${root}/${prj}"
+    [ -n "${dir}" ] && cd "${dir}"
+    zle accept-line
+    zle reset-prompt
+}
+zle -N _fzf_cd_prj
+bindkey "^p" _fzf_cd_prj
+
+function mkcd() {
+    if [ -z "$1" ]; then
+        echo "Usage: mkcd <directory>"
+        return 1
+    fi
+    mkdir -p "$1" && cd "$1"
+}
+
+# Aliases
+if [[ $(command -v eza) ]]; then
+  alias e='eza --icons --git'
+  alias l=e
+  alias ls=e
+  alias ea='eza -a --icons --git'
+  alias la=ea
+  alias ee='eza -aahl --icons --git'
+  alias ll=ee
+  alias et='eza -T -L 3 -a -I "node_modules|.git|.cache" --icons'
+  alias lt=et
+  alias eta='eza -T -a -I "node_modules|.git|.cache" --color=always --icons | less -r'
+  alias lta=eta
+  alias l='clear && ls'
+fi
+
+alias nv='neovide.exe'
+alias zonedel="find ./ -type f -name '*:Zone.Identifier' -exec rm {} \;"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+eval "$(/home/notsh/.local/bin/mise activate zsh)"
+
+# pnpm
+export PNPM_HOME="/home/notsh/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+eval "$(zellij setup --generate-auto-start zsh)"
+
