@@ -37,6 +37,7 @@ fi
 yay -S --noconfirm --needed \
     python \
     neovim \
+    go \
     
 # Install mise if not already installed
 if ! command -v mise &> /dev/null; then
@@ -50,4 +51,7 @@ fi
 # Install Node.js using mise
 mise use --global node@latest
 
+# Install aqua
+go install github.com/aquaproj/aqua/v2/cmd/aqua@latest
 
+aqua i
