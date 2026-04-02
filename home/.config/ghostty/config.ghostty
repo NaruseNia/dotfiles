@@ -1,0 +1,10 @@
+window-padding-x=24
+window-padding-y=24
+macos-titlebar-style=tabs
+background-opacity=0.75
+background-blur=true
+theme=Aizen Dark
+
+font-family=Lilex Nerd Font Mono
+font-family=BIZ UDGothic
+font-feature=+zero, +cv02, +cv06, +cv01, +ss02, +ss01, +cv08
