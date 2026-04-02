@@ -1,0 +1,9 @@
+[perpet]
+version = 1
+
+[settings]
+default_mode = "symlink"
+editor = "nvim"
+git_auto_commit = false
+git_remote = "origin"
+
