@@ -1,0 +1,16 @@
+snippets:
+  - name: git commit message
+    keyword: gcm
+    snippet: git commit -m '{{commit_message}}'
+  - name: git push origin
+    keyword: gpo
+    snippet: git push origin
+  - name: Restart zeno server
+    keyword: rzz
+    snippet: zeno server restart
+  - name: Run neovide on background
+    keyword: nvg
+    snippet: neovide {{path}} 2>/dev/null &
+  - name: Run neovide on background at pwd
+    keyword: nvc
+    snippet: neovide . 2>/dev/null &
