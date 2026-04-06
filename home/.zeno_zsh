@@ -1,0 +1,80 @@
+# 定義されていれば、その場所から設定ファイル群を読み込む
+export ZENO_HOME=~/.config/zeno
+
+# プラグイン読み込み時の deno cache 実行を無効化する場合
+# export ZENO_DISABLE_EXECUTE_CACHE_COMMAND=1
+
+# fzf-tmux を有効化する場合
+# export ZENO_ENABLE_FZF_TMUX=1
+
+# fzf-tmux のオプションを設定する場合
+# export ZENO_FZF_TMUX_OPTIONS="-p"
+
+# デフォルトでは Unix Domain Socket を使う
+# 無効化する場合
+# export ZENO_DISABLE_SOCK=1
+
+# socket client read のタイムアウト秒数（小数可）
+# デフォルト: 0.3
+# export ZENO_CLIENT_TIMEOUT_SECONDS=0.3
+
+# 組み込み補完を無効化する場合
+# export ZENO_DISABLE_BUILTIN_COMPLETION=1
+
+# projectRoot/.zeno の自動探索を無効化する場合
+# export ZENO_DISABLE_AUTOMATIC_WORKSPACE_LOOKUP=1
+
+# ワークスペースローカル設定を明示的なディレクトリから読み込む
+# 絶対パス、または project root からの相対パス
+# export ZENO_LOCAL_CONFIG_PATH=.zeno
+
+# デフォルト
+# export ZENO_GIT_CAT="cat"
+# 色付きで git ファイルプレビュー
+export ZENO_GIT_CAT="bat --color=always"
+
+# デフォルト
+# export ZENO_GIT_TREE="tree"
+# 色付きで git ディレクトリプレビュー
+export ZENO_GIT_TREE="eza --tree"
+
+# upstream デフォルトのキーセット
+zeno-bind-default-keys
+
+# upstream lazy キーセット
+# source /path/to/dir/zeno-bootstrap.zsh
+# zeno-bind-default-keys --lazy
+# zsh-defer zeno-preload
+
+if [[ -n $ZENO_LOADED ]]; then
+  bindkey ' '  zeno-auto-snippet
+
+  # snippet が一致しなかった場合の fallback（デフォルト: self-insert）
+  # export ZENO_AUTO_SNIPPET_FALLBACK=self-insert
+
+  # zsh の incremental search を使っている場合
+  # bindkey -M isearch ' ' self-insert
+
+  bindkey '^m' zeno-auto-snippet-and-accept-line
+
+  bindkey '^i' zeno-completion
+
+  bindkey '^xx' zeno-insert-snippet           # snippet picker（fzf）を開いてカーソル位置へ挿入
+
+  bindkey '^x '  zeno-insert-space
+  bindkey '^x^m' accept-line
+  bindkey '^x^z' zeno-toggle-auto-snippet
+
+  # preprompt の bind
+  bindkey '^xp' zeno-preprompt
+  bindkey '^xs' zeno-preprompt-snippet
+  # ZLE 外では `zeno-preprompt git {{cmd}}` や `zeno-preprompt-snippet foo`
+  # を実行して次の prompt prefix を設定できます。空引数で呼ぶと状態をリセットします。
+
+  bindkey '^r' zeno-history-selection         # 従来の history widget
+  # bindkey '^r' zeno-smart-history-selection # smart history widget
+
+  # completion が一致しなかった場合の fallback
+  # （デフォルト: あれば fzf-completion、なければ expand-or-complete）
+  # export ZENO_COMPLETION_FALLBACK=expand-or-complete
+fi
