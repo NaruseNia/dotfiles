@@ -22,8 +22,8 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
-# THEME_NAME="spaceship-prompt/spaceship-prompt"
-THEME_NAME="jackharrisonsherlock/common"
+THEME_NAME="spaceship-prompt/spaceship-prompt"
+# THEME_NAME="jackharrisonsherlock/common"
 # THEME_NAME="egorlem/ultima.zsh-theme"
 
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
