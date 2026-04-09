@@ -38,9 +38,6 @@ export ZENO_GIT_CAT="bat --color=always"
 # 色付きで git ディレクトリプレビュー
 export ZENO_GIT_TREE="eza --tree"
 
-# upstream デフォルトのキーセット
-zeno-bind-default-keys
-
 # upstream lazy キーセット
 # source /path/to/dir/zeno-bootstrap.zsh
 # zeno-bind-default-keys --lazy

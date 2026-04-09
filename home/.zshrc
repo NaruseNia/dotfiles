@@ -148,13 +148,13 @@ if [[ $(command -v eza) ]]; then
   alias lta=eta
   alias l='clear && ls'
 fi
-eval "$(/Users/ho0897/.local/bin/mise activate zsh)"
+eval "$($HOME/.local/bin/mise activate zsh)"
 
 . "$HOME/.atuin/bin/env"
 
 eval "$(atuin init zsh)"
 
-alias nv='~/bin/nvim-11/bin/nvim'
+alias nv="$HOME/bin/nvim-11/bin/nvim"
 alias acmd='act --container-architecture linux/amd64'
 
 # eval "$(zellij setup --generate-auto-start zsh)"
@@ -173,4 +173,4 @@ export AUTO_LS_COMMANDS=(func)
 export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
-source ~/.zeno_zsh
+source $HOME/.zeno_zsh
