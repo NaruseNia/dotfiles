@@ -8,3 +8,5 @@ theme=Aizen Dark
 font-family=Lilex Nerd Font Mono
 font-family=BIZ UDGothic
 font-feature=+zero, +cv02, +cv06, +cv01, +ss02, +ss01, +cv08
+
+custom-shader = ./shaders/cursor_warp.glsl

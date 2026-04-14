@@ -1,0 +1,33 @@
+git:
+  pagers:
+    - pager: delta --paging=never --true-color=auto --dark --side-by-side --line-numbers --syntax-theme=Dracula --width=variable --navigate
+      colorArg: always
+
+gui:
+  theme:
+    activeBorderColor:
+      - "#c8a2f4"
+      - bold
+    inactiveBorderColor:
+      - "#6068a0"
+    searchingActiveBorderColor:
+      - "#90dcd0"
+      - bold
+    optionsTextColor:
+      - "#5a5a7a"
+    selectedLineBgColor:
+      - "#333333"
+    inactiveViewSelectedLineBgColor:
+      - bold
+    cherryPickedCommitFgColor:
+      - "#5a5a7a"
+    cherryPickedCommitBgColor:
+      - "#90dcd0"
+    markedBaseCommitFgColor:
+      - "#90dcd0"
+    markedBaseCommitBgColor:
+      - "#f5dea4"
+    unstagedChangesColor:
+      - "#f08898"
+    defaultFgColor:
+      - "#d0d6f0"

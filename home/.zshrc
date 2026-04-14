@@ -148,6 +148,22 @@ if [[ $(command -v eza) ]]; then
   alias lta=eta
   alias l='clear && ls'
 fi
+
+if [[ $(command -v tmux) ]]; then
+  if [[ ! -e "$HOME/.tmux/plugins/tpm" ]]; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  fi
+fi
+
+if command -v lazygit &> /dev/null; then
+  declare -x LG_CONFIG_FILE=~/.config/lazygit/config.yml
+  export LG_CONFIG_FILE
+
+  function lg(){
+    lazygit "$@"
+  }
+fi
+
 eval "$(/Users/ho0897/.local/bin/mise activate zsh)"
 
 . "$HOME/.atuin/bin/env"

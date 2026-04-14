@@ -5,8 +5,14 @@ snippets:
   - name: git push origin
     keyword: gpo
     snippet: git push origin
+  - name: git pull origin
+    keyword: guo
+    snippet: git pull origin
+  - name: vscode insiders
+    keyword: vci
+    snippet: code-insiders
   - name: Restart zeno server
-    keyword: rzz
+    keyword: zrr
     snippet: zeno server restart
   - name: Run neovide on background
     keyword: nvg
