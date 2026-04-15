@@ -43,20 +43,27 @@ in
   #       refuse to overwrite it. Leave the corresponding block commented
   #       until you retire perpet or remove the conflicting file.
   # ---------------------------------------------------------------------
-  # Disabled: perpet currently manages ~/.gitconfig (see home/.gitconfig).
-  # Re-enable this block (and remove .gitconfig from perpet) if/when you
-  # want home-manager to own Git config instead.
-  # programs.git = {
-  #   enable = true;
-  #   userName  = fullName;
-  #   userEmail = email;
-  #   delta.enable = true;
-  #   extraConfig = {
-  #     init.defaultBranch = "main";
-  #     merge.conflictstyle = "zdiff3";
-  #     pull.rebase = true;
-  #   };
-  # };
+  # Git (include-file pattern):
+  # perpet owns ~/.gitconfig and sources this file via `[include] path =
+  # ~/.config/git/nix.inc`. Portable, opinionated defaults live here;
+  # personal identity (name / email / signing key) stays in perpet so each
+  # machine can override. Settings in perpet's .gitconfig that appear AFTER
+  # the include directive take precedence over anything here.
+  xdg.configFile."git/nix.inc".text = ''
+    [init]
+        defaultBranch = main
+    [pull]
+        rebase = true
+    [core]
+        pager = delta
+    [interactive]
+        diffFilter = delta --color-only
+    [delta]
+        navigate = true
+        dark = true
+    [merge]
+        conflictstyle = zdiff3
+  '';
 
   # gh has no perpet-managed counterpart, so this is safe to leave enabled.
   programs.gh = {
