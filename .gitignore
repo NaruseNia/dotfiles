@@ -1,0 +1,9 @@
+# Personal Nix config (email/hostname) — never commit.
+nix/user.nix
+
+# Nix build artifacts
+result
+result-*
+
+# macOS
+.DS_Store
