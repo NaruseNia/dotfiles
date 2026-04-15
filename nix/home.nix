@@ -77,6 +77,33 @@ in
   # programs.bat.enable = true;
 
   # ---------------------------------------------------------------------
+  # mise (Nix × mise hybrid)
+  #
+  # - mise binary is provided through home.packages above.
+  # - conf.d/nix.toml declares the "baseline" global runtimes in Nix so
+  #   they travel with the flake. mise layers this with the imperative
+  #   ~/.config/mise/config.toml (written by `mise use -g <tool>@<ver>`),
+  #   and the latter takes precedence — so pins/overrides stay possible.
+  # - home.activation.miseInstall runs `mise install` after activation to
+  #   materialize anything missing.
+  # ---------------------------------------------------------------------
+  xdg.configFile."mise/conf.d/nix.toml".text = ''
+    [tools]
+    node   = "latest"
+    python = "latest"
+    bun    = "latest"
+    pnpm   = "latest"
+    deno   = "latest"
+    go     = "latest"
+    rust   = "latest"
+    zig    = "latest"
+  '';
+
+  home.activation.miseInstall = lib.hm.dag.entryAfter [ "installPackages" "writeBoundary" ] ''
+    $DRY_RUN_CMD ${pkgs.mise}/bin/mise install --yes || true
+  '';
+
+  # ---------------------------------------------------------------------
   # External git-based configs (nvim / tpm) — kept as git clones rather than
   # translated into programs.neovim / programs.tmux so you can iterate on
   # them outside Nix.
