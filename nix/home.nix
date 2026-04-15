@@ -37,30 +37,34 @@ in
   ];
 
   # ---------------------------------------------------------------------
-  # Programs — declarative shell/tool configs
-  # NOTE: these generate files under ~/.config/*. If perpet also manages
-  #       a given config, disable the corresponding programs.* block to
-  #       avoid conflicts. Comment/uncomment as you migrate.
+  # Programs — declarative shell/tool configs.
+  # NOTE: these generate files under ~/ and ~/.config/*. If perpet (or any
+  #       other tool) already manages the same target, home-manager will
+  #       refuse to overwrite it. Leave the corresponding block commented
+  #       until you retire perpet or remove the conflicting file.
   # ---------------------------------------------------------------------
-  programs.git = {
-    enable = true;
-    userName  = fullName;
-    userEmail = email;
-    delta.enable = true;
-    extraConfig = {
-      init.defaultBranch = "main";
-      merge.conflictstyle = "zdiff3";
-      pull.rebase = true;
-    };
-  };
+  # Disabled: perpet currently manages ~/.gitconfig (see home/.gitconfig).
+  # Re-enable this block (and remove .gitconfig from perpet) if/when you
+  # want home-manager to own Git config instead.
+  # programs.git = {
+  #   enable = true;
+  #   userName  = fullName;
+  #   userEmail = email;
+  #   delta.enable = true;
+  #   extraConfig = {
+  #     init.defaultBranch = "main";
+  #     merge.conflictstyle = "zdiff3";
+  #     pull.rebase = true;
+  #   };
+  # };
 
+  # gh has no perpet-managed counterpart, so this is safe to leave enabled.
   programs.gh = {
     enable = true;
     settings.git_protocol = "ssh";
   };
 
-  # Shell integrations (safe even alongside perpet's own shell files, since
-  # home-manager writes to its own managed rc and sources it from your shell).
+  # Shell integrations — keep disabled while perpet owns .zshrc / zeno_zsh etc.
   # programs.fzf.enable = true;
   # programs.zoxide.enable = true;
   # programs.bat.enable = true;
