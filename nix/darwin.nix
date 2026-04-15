@@ -6,7 +6,14 @@
   # ---------------------------------------------------------------------
   system.stateVersion = 5;
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # install-nix.sh bootstraps Nix through the Determinate Systems installer,
+  # which ships its own daemon and Nix config. Telling nix-darwin to stay
+  # out of `nix.*` management avoids the "Determinate detected, aborting
+  # activation" error. If you ever switch to a non-Determinate Nix, set
+  # nix.enable = true and uncomment the settings below.
+  nix.enable = false;
+  # nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # nix-darwin now requires this explicit pointer.
   system.primaryUser = username;
