@@ -45,7 +45,7 @@
       # ---------------------------------------------------------------------
       # macOS: nix-darwin (system) + home-manager (user) + nix-homebrew (casks)
       # Build & apply:
-      #   nix run github:LnL7/nix-darwin -- switch --flake .#${hostname}
+      #   sudo nix run github:LnL7/nix-darwin -- switch --flake .#${hostname}
       # ---------------------------------------------------------------------
       darwinConfigurations.${hostname} = nix-darwin.lib.darwinSystem {
         system = darwinSystem;

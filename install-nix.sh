@@ -44,7 +44,8 @@ NIX_FLAGS=(--extra-experimental-features "nix-command flakes")
 case "$(uname -s)" in
   Darwin)
     echo "Applying nix-darwin config → $FLAKE_DIR#$HOSTNAME_LABEL"
-    nix "${NIX_FLAGS[@]}" run github:LnL7/nix-darwin -- \
+    # nix-darwin now requires root for system activation.
+    sudo nix "${NIX_FLAGS[@]}" run github:LnL7/nix-darwin -- \
       switch --flake "$FLAKE_DIR#$HOSTNAME_LABEL"
     ;;
   Linux)
@@ -61,5 +62,5 @@ esac
 
 echo
 echo "Done. Rebuild in the future with one of:"
-echo "  darwin-rebuild switch --flake $FLAKE_DIR#$HOSTNAME_LABEL"
-echo "  home-manager switch   --flake $FLAKE_DIR#\$USER@linux"
+echo "  sudo darwin-rebuild switch --flake $FLAKE_DIR#$HOSTNAME_LABEL"
+echo "  home-manager switch        --flake $FLAKE_DIR#\$USER@linux"

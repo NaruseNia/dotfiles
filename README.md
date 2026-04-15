@@ -93,7 +93,7 @@ cp nix/user.example.nix nix/user.nix
 
 ```sh
 # macOS
-darwin-rebuild switch --flake ~/.perpet/nix#<hostname>
+sudo darwin-rebuild switch --flake ~/.perpet/nix#<hostname>
 
 # Linux
 home-manager switch --flake ~/.perpet/nix#<username>@linux
