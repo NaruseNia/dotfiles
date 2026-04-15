@@ -21,3 +21,6 @@
 	path = ~/.config/delta/themes.gitconfig
 [include]
 	path = ~/.gitconfig.local
+[user]
+	name = Naruse Nia
+	email = notshinsin0000@gmail.com
