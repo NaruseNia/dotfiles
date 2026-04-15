@@ -65,11 +65,14 @@ in
         conflictstyle = zdiff3
   '';
 
-  # gh has no perpet-managed counterpart, so this is safe to leave enabled.
-  programs.gh = {
-    enable = true;
-    settings.git_protocol = "ssh";
-  };
+  # Disabled: the user's ~/.config/gh/config.yml already exists (from a
+  # prior `gh auth login`) and home-manager refuses to overwrite files
+  # it did not create. Replacing it would also nuke the auth token.
+  # Re-enable only on a fresh machine where gh has not been used yet.
+  # programs.gh = {
+  #   enable = true;
+  #   settings.git_protocol = "ssh";
+  # };
 
   # Shell integrations — keep disabled while perpet owns .zshrc / zeno_zsh etc.
   # programs.fzf.enable = true;

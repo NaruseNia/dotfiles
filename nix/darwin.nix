@@ -37,7 +37,10 @@
     enable = true;
     onActivation = {
       autoUpdate = true;
-      cleanup    = "zap";   # removes any cask not declared here
+      # "none": keep anything manually-installed (taps/formulae/casks)
+      # outside this file. Switch to "uninstall" or "zap" if you want
+      # nix-darwin to enforce an exact list.
+      cleanup    = "none";
       upgrade    = true;
     };
 
