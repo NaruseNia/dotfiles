@@ -177,6 +177,8 @@ pkg_name() {
     poppler:dnf)         echo poppler-utils ;;
     poppler:zypper)      echo poppler-tools ;;
     poppler:pacman)      echo poppler ;;
+    qemu:apt)            echo qemu-system-x86 ;;
+    qemu:pacman)         echo qemu-full ;;
     resvg:*)             echo resvg ;;           # may not exist on some distros
     pinentry-mac:*)      echo - ;;               # skip on Linux
     gcc:apt)             echo - ;;               # already via build-essential
@@ -325,7 +327,7 @@ run_cli() {
     git-delta lazygit
     pinentry-mac sqlite
     xclip wl-clipboard
-    lima
+    lima qemu
   )
   for p in "${pkgs[@]}"; do pkg_install "$p"; done
 

@@ -20,7 +20,7 @@ in
     sqlite
 
     # Linux VMs (runs Linux workloads on macOS; also works on Linux)
-    lima
+    lima qemu
 
     # yazi + dependencies
     yazi ffmpeg p7zip jq poppler fd zoxide resvg imagemagick
