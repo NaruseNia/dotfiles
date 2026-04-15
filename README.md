@@ -13,6 +13,28 @@ pick whichever fits your taste.
 
 Each entry point is self-contained — you don't run them together.
 
+## Personal git identity (any path)
+
+`home/.gitconfig` intentionally contains **no** personal identity — the
+committed file only wires up includes. Drop your identity into
+`~/.gitconfig.local`, which is never touched by this repo:
+
+```ini
+[user]
+	name = Your Name
+	email = you@example.com
+	signingkey = XXXXXXXXXXXXXXXX
+[gpg]
+	program = gpg
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
+```
+
+Git silently skips missing includes, so a machine without this file still
+works — git just won't know who you are until you create it.
+
 ## 1. Shell-script + Homebrew (macOS)
 
 ```sh
