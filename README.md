@@ -93,11 +93,14 @@ cp nix/user.example.nix nix/user.nix
 
 ```sh
 # macOS
-sudo darwin-rebuild switch --flake ~/.perpet/nix#<hostname>
+sudo darwin-rebuild switch --flake path:$HOME/.perpet/nix#<hostname>
 
 # Linux
-home-manager switch --flake ~/.perpet/nix#<username>@linux
+home-manager switch --flake path:$HOME/.perpet/nix#<username>@linux
 ```
+
+The `path:` URL scheme is required because `nix/user.nix` is gitignored —
+without it the flake evaluator would not see the file.
 
 ### Layout
 

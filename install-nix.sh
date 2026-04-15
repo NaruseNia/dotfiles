@@ -41,18 +41,25 @@ NIX_FLAGS=(--extra-experimental-features "nix-command flakes")
 # ---------------------------------------------------------------------------
 # 2. Apply the flake
 # ---------------------------------------------------------------------------
+#
+# Use the `path:` URL scheme so Nix reads the flake directly from the
+# filesystem instead of treating it as a git tree — this is what lets
+# gitignored nix/user.nix participate in evaluation.
+#
+FLAKE_URL="path:$FLAKE_DIR"
+
 case "$(uname -s)" in
   Darwin)
-    echo "Applying nix-darwin config → $FLAKE_DIR#$HOSTNAME_LABEL"
+    echo "Applying nix-darwin config → $FLAKE_URL#$HOSTNAME_LABEL"
     # nix-darwin now requires root for system activation.
     sudo nix "${NIX_FLAGS[@]}" run github:LnL7/nix-darwin -- \
-      switch --flake "$FLAKE_DIR#$HOSTNAME_LABEL"
+      switch --flake "$FLAKE_URL#$HOSTNAME_LABEL"
     ;;
   Linux)
     USERNAME=$(id -un)
-    echo "Applying home-manager config → $FLAKE_DIR#$USERNAME@linux"
+    echo "Applying home-manager config → $FLAKE_URL#$USERNAME@linux"
     nix "${NIX_FLAGS[@]}" run github:nix-community/home-manager -- \
-      switch --flake "$FLAKE_DIR#$USERNAME@linux"
+      switch --flake "$FLAKE_URL#$USERNAME@linux"
     ;;
   *)
     echo "Unsupported OS: $(uname -s)" >&2
@@ -62,5 +69,5 @@ esac
 
 echo
 echo "Done. Rebuild in the future with one of:"
-echo "  sudo darwin-rebuild switch --flake $FLAKE_DIR#$HOSTNAME_LABEL"
-echo "  home-manager switch        --flake $FLAKE_DIR#\$USER@linux"
+echo "  sudo darwin-rebuild switch --flake $FLAKE_URL#$HOSTNAME_LABEL"
+echo "  home-manager switch        --flake $FLAKE_URL#\$USER@linux"
