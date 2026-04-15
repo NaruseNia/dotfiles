@@ -22,7 +22,7 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
-THEME_NAME="spaceship-prompt/spaceship-prompt"
+THEME_NAME="geometry-zsh/geometry"
 # THEME_NAME="jackharrisonsherlock/common"
 # THEME_NAME="egorlem/ultima.zsh-theme"
 
@@ -41,6 +41,9 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting
 
 zinit load $THEME_NAME
+
+GEOMETRY_STATUS_SYMBOL="󰆧"
+GEOMETRY_STATUS_SYMBOL_ERROR="󱐝"
 
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
