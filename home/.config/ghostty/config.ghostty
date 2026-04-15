@@ -3,6 +3,7 @@ window-padding-y=24
 macos-titlebar-style=tabs
 background-opacity=0.75
 background-blur=true
+macos-icon=blueprint
 theme=Aizen Dark
 
 font-family=Lilex Nerd Font
