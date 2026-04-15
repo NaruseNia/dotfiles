@@ -19,6 +19,9 @@ in
     delta lazygit
     sqlite
 
+    # Linux VMs (runs Linux workloads on macOS; also works on Linux)
+    lima
+
     # yazi + dependencies
     yazi ffmpeg p7zip jq poppler fd zoxide resvg imagemagick
 

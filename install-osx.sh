@@ -112,6 +112,7 @@ run_cli() {
     fzf ripgrep bat eza neovim
     git-delta lazygit
     pinentry-mac sqlite
+    lima
   )
   for p in "${pkgs[@]}"; do brew_install "$p"; done
 }

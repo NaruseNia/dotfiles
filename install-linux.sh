@@ -325,6 +325,7 @@ run_cli() {
     git-delta lazygit
     pinentry-mac sqlite
     xclip wl-clipboard
+    lima
   )
   for p in "${pkgs[@]}"; do pkg_install "$p"; done
 
