@@ -33,12 +33,11 @@ zinit load mafredri/zsh-async
 zinit load zsh-users/zsh-history-substring-search
 zinit load zsh-users/zsh-completions
 zinit load chrissicool/zsh-256color
-zinit ice lucid depth"1" blockf
-zinit light yuki-yano/zeno.zsh
-zinit ice lucid depth"1" blockf
-zinit light desyncr/auto-ls
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting
+
+zinit ice lucid depth"1" blockf
+zinit load yuki-yano/zeno.zsh
 
 zinit load $THEME_NAME
 
@@ -179,15 +178,6 @@ alias acmd='act --container-architecture linux/amd64'
 # eval "$(zellij setup --generate-auto-start zsh)"
 
 export EDITOR='nvim'
-
-auto-ls-func () {
-  if [[ $(command -v eza) ]]; then
-    eza --icons --git
-  else
-    ls
-  fi
-}
-export AUTO_LS_COMMANDS=(func)
 
 export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
