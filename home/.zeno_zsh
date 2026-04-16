@@ -44,6 +44,8 @@ export ZENO_GIT_TREE="eza --tree"
 # zsh-defer zeno-preload
 
 if [[ -n $ZENO_LOADED ]]; then
+  zeno-init
+  zeno server restart
   bindkey ' '  zeno-auto-snippet
 
   # snippet が一致しなかった場合の fallback（デフォルト: self-insert）
