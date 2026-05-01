@@ -105,21 +105,6 @@ run_update() {
   spin "brew update..." brew update
 }
 
-run_bundle() {
-  section "Installing everything via Brewfile"
-  local brewfile
-  brewfile="$(cd "$(dirname "$0")" && pwd)/Brewfile"
-  if [[ ! -f "$brewfile" ]]; then
-    warn "Brewfile not found at $brewfile — skipping"
-    return 0
-  fi
-  if spin_safe "brew bundle..." brew bundle --file="$brewfile" --no-lock; then
-    ok "✓ Brewfile applied"
-  else
-    warn "✗ brew bundle had errors — check output"
-  fi
-}
-
 run_cli() {
   section "Installing CLI tools"
   local pkgs=(
@@ -360,7 +345,7 @@ run_summary() {
 # ---------------------------------------------------------------------------
 # Section registry & CLI
 # ---------------------------------------------------------------------------
-SECTIONS=(update bundle cli yazi casks mise runtimes ai identity dotfiles nvim tmux defaults)
+SECTIONS=(update cli yazi casks mise runtimes ai identity dotfiles nvim tmux defaults)
 
 usage() {
   cat <<EOF
@@ -368,7 +353,6 @@ Usage: $(basename "$0") [options] [section ...]
 
 Sections:
   update     Update Homebrew
-  bundle     Install everything via Brewfile (brew bundle)
   cli        CLI tools (git, gh, fzf, ripgrep, neovim, lazygit, zellij, ...)
   yazi       yazi + dependencies
   casks      GUI apps (ghostty, vivaldi, docker-desktop, fonts, ...)
