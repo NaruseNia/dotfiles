@@ -14,7 +14,7 @@ in
   # ---------------------------------------------------------------------
   home.packages = with pkgs; [
     # Core CLI
-    git ghq gh wget curl tmux
+    git ghq gh wget curl tmux zellij
     fzf ripgrep bat eza neovim
     delta lazygit
     sqlite
