@@ -16,9 +16,13 @@
 
     # Declarative Homebrew (for casks + fonts not in nixpkgs)
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+
+    zjstatus = {
+      url = "github:dj95/zjstatus";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, nix-darwin, nix-homebrew, ... }:
+  outputs = { nixpkgs, home-manager, nix-darwin, nix-homebrew, zjstatus, ... }:
     let
       # ---------------------------------------------------------------------
       # Personal config is loaded from ./user.nix (gitignored).
@@ -36,8 +40,14 @@
 
       specialArgs = { inherit username fullName email; };
 
+      overlays = [
+        (final: prev: {
+          zjstatus = zjstatus.packages.${prev.system}.default;
+        })
+      ];
+
       mkPkgs = system: import nixpkgs {
-        inherit system;
+        inherit system overlays;
         config.allowUnfree = true;
       };
     in
@@ -51,6 +61,7 @@
         system = darwinSystem;
         inherit specialArgs;
         modules = [
+          { nixpkgs.overlays = overlays; }
           ./darwin.nix
 
           nix-homebrew.darwinModules.nix-homebrew
