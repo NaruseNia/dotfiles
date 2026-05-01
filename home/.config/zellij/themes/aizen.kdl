@@ -1,0 +1,15 @@
+themes {
+    aizen {
+        bg      "#141414"
+        fg      "#d0d6f0"
+        red     "#f08898"
+        green   "#d0d6f0"
+        blue    "#84b4f8"
+        yellow  "#f5dea4"
+        magenta "#c8a2f4"
+        orange  "#f8b080"
+        cyan    "#90dcd0"
+        black   "#111111"
+        white   "#d0d6f0"
+    }
+}

@@ -262,6 +262,23 @@ run_tmux() {
   fi
 }
 
+run_zellij() {
+  section "Setting up zellij plugins"
+  local dir="$HOME/.config/zellij/plugins"
+  local wasm="$dir/zjstatus.wasm"
+  mkdir -p "$dir"
+  if [[ -f "$wasm" ]]; then
+    info "✓ zjstatus.wasm already exists"
+  else
+    if spin_safe "Downloading zjstatus.wasm..." \
+      curl -fSL -o "$wasm" "https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm"; then
+      ok "✓ zjstatus.wasm downloaded"
+    else
+      warn "✗ zjstatus.wasm download failed — skipping"
+    fi
+  fi
+}
+
 run_defaults() {
   section "Applying macOS defaults"
   defaults write NSGlobalDomain KeyRepeat                  -int 2
@@ -345,7 +362,7 @@ run_summary() {
 # ---------------------------------------------------------------------------
 # Section registry & CLI
 # ---------------------------------------------------------------------------
-SECTIONS=(update cli yazi casks mise runtimes ai identity dotfiles nvim tmux defaults)
+SECTIONS=(update cli yazi casks mise runtimes ai identity dotfiles nvim tmux zellij defaults)
 
 usage() {
   cat <<EOF
@@ -363,6 +380,7 @@ Sections:
   dotfiles   perpet + dotfiles
   nvim       Neovim config + Lazy sync
   tmux       tmux plugin manager (tpm)
+  zellij     zellij plugins (zjstatus)
   defaults   macOS defaults
 
 Options:

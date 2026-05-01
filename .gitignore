@@ -5,5 +5,8 @@ nix/user.nix
 result
 result-*
 
+# Wasm plugins (downloaded at install time)
+*.wasm
+
 # macOS
 .DS_Store

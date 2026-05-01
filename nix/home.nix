@@ -25,9 +25,6 @@ in
     # yazi + dependencies
     yazi ffmpeg p7zip jq poppler fd zoxide resvg imagemagick
 
-    # Zellij plugins
-    zjstatus
-
     # Runtime version manager (per-project / global runtimes)
     mise
 
