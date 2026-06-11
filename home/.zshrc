@@ -183,3 +183,4 @@ export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
 source $HOME/.zeno_zsh
+

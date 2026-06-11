@@ -24,3 +24,5 @@
 [user]
 	name = Naruse Nia
 	email = notshinsin0000@gmail.com
+[init]
+	defaultBranch = main

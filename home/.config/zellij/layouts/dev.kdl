@@ -1,0 +1,18 @@
+layout {
+    pane size=1 borderless=true {
+        plugin location="zjstatus"
+    }
+    pane split_direction="vertical" size="75%" {
+        pane name="Neovim" command="nvim" {
+            args "."
+            size "60%"
+        }
+        pane stacked=true size="40%" {
+            pane name="Terminal"
+            pane name="Claude Code" command="claude" {
+                args "--model" "claude-opus-4-6[1m]" "--enable-auto-mode"
+            }
+        }
+    }
+    pane name="Terminal" size="25%"
+}

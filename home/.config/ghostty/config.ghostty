@@ -9,6 +9,7 @@ theme=Cutie Pro
 
 # font-family=Lilex Nerd Font
 font-family=Berkeley Mono
+font-family-italic=Lilex Nerd Font
 font-family=BIZ UDGothic
 font-feature=+zero, +cv02, +cv06, +cv01, +ss02, +ss01, +cv08
 
